@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "nombre": "Oier Etxabe",
+    "turno": "Mañana",
+    "telefono": "655111222"
+  },
+  {
+    "id": 2,
+    "nombre": "Maialen Soto",
+    "turno": "Noche",
+    "telefono": "655333444"
+  }
+]

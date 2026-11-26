@@ -8,15 +8,13 @@ app.use(express.json())
 
 const camareros = require('./DATOS_API/camareros.json')
 const reservas = require('./DATOS_API/reservas.json')
-const { error } = require('node:console')
-const { captureRejections } = require('node:events')
 
 const RUTA_CAMAREROS = path.join(__dirname, 'DATOS_API', 'camareros.json')
 const RUTA_RESERVAS = path.join(__dirname, 'DATOS_API', 'reservas.json')
 
 app.use((req, res, next) => {
     res.on(('finish'), () => {
-        color = res.statusCode > 400 ? pc.red(res.statusCode) : pc.green(res.statusCode)
+        const color = res.statusCode >= 400 ? pc.red(res.statusCode) : pc.green(res.statusCode)
         console.log(`[${req.method}] ${req.url}, ${color}`)
     })
     next()
@@ -37,7 +35,7 @@ app.get("/api/reservas/:codigo", (req, res) => {
 })
 
 app.post("/api/reservas", (req, res) => {
-    const nuevocodigo = "R" + String(reservas.length).padStart(3, 0)
+    const nuevocodigo = "R" + String(reservas.length + 1).padStart(3, 0)
     const nuevo = {
     codigo: nuevocodigo ,
     nombre: req.body.nombre ,
@@ -49,6 +47,7 @@ app.post("/api/reservas", (req, res) => {
 
     reservas.push(nuevo)
     fs.writeFileSync(RUTA_RESERVAS, JSON.stringify(reservas, null, 2))
+    res.status(201).json(nuevo)
 })
 
 app.put("/api/reservas/:codigo", (req,res) => {
@@ -78,21 +77,65 @@ app.delete("/api/reservas/:codigo", (req,res) => {
     } else {
         reservas.splice(index, 1)
         fs.writeFileSync(RUTA_RESERVAS, JSON.stringify(reservas, null, 2))
+        res.status(200).send("borrado")
+    }
+})
+
+app.get("/api/camareros", (req, res) => {
+    res.status(200).json(camareros)
+})
+
+app.get("/api/camareros/:id", (req, res) => {
+    const ide = Number(req.params.id)
+    const camarero = camareros.find(c => c.id === ide)
+    if (!camarero) {
+        res.status(404).json({error: "not fond"})
+    } else {
+        res.status(200).json(camarero)
+    }
+})
+
+app.post("/api/camareros", (req, res) => {
+    const nuevo = {
+        id: camareros.length + 1,
+        nombre: req.body.nombre,
+        turno: req.body.turno,
+        telefono: req.body.telefono,
+    }
+    camareros.push(nuevo)
+    fs.writeFileSync(RUTA_CAMAREROS, JSON.stringify(camareros, null, 2))
+    res.status(201).json(nuevo)
+})
+
+app.put("/api/camareros/:id", (req, res) => {
+    const ide = Number(req.params.id)
+    const index = camareros.findIndex(c => c.id === ide)
+    if (index === -1) {
+        res.status(404).json({error: "not found"})
+    } else {
+        camareros[index] = {
+            id: ide,
+            nombre: req.body.nombre ?? camareros[index].nombre,
+            turno: req.body.turno ?? camareros[index].turno,
+            telefono: req.body.telefono ?? camareros[index].telefono,
+        }
+        fs.writeFileSync(RUTA_CAMAREROS, JSON.stringify(camareros, null, 2))
+        res.status(200).json(camareros[index])
     }
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
+app.delete("/api/camareros/:id", (req, res) => {
+    const ide = Number(req.params.id)
+    const index = camareros.findIndex(i => i.id === ide)
+    if (index === -1) {
+        res.status(404).send("error 404")
+    } else {
+        camareros.splice(index, 1)
+        fs.writeFileSync(RUTA_CAMAREROS, JSON.stringify(camareros, null, 2))
+        res.status(200).json({completado: "borrado"})
+    }
+})
 
 
 
