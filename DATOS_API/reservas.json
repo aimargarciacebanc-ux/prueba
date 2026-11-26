@@ -1,0 +1,61 @@
+[
+  {
+    "codigo": "R001",
+    "nombre": "Familia Agirre",
+    "fecha": "2026-12-05T21:00:00",
+    "personas": 4,
+    "mesa": 7,
+    "estado": "Confirmada"
+  },
+  {
+    "codigo": "R002",
+    "nombre": "Cena de empresa",
+    "fecha": "2026-12-12T14:30:00",
+    "personas": 12,
+    "mesa": 1,
+    "estado": "Confirmada"
+  },
+  {
+    "codigo": "R003",
+    "nombre": "Ainhoa Ruiz",
+    "fecha": "2026-12-06T20:30:00",
+    "personas": 2,
+    "mesa": 3,
+    "estado": "Confirmada"
+  },
+  {
+    "codigo": "R4",
+    "nombre": "Jon y Ane",
+    "fecha": "2026-12-24T21:00:00",
+    "personas": 2,
+    "mesa": 4
+  },
+  {
+    "codigo": "R5",
+    "nombre": "Jon y Ane",
+    "fecha": "2026-12-24T21:00:00",
+    "personas": 2,
+    "mesa": 4
+  },
+  {
+    "codigo": "R6",
+    "nombre": "Jon y Ane",
+    "fecha": "2026-12-24T21:00:00",
+    "personas": 2,
+    "mesa": 4
+  },
+  {
+    "codigo": "R07",
+    "nombre": "Jon y Ane",
+    "fecha": "2026-12-24T21:00:00",
+    "personas": 2,
+    "mesa": 4
+  },
+  {
+    "codigo": "R008",
+    "nombre": "Jon y Ane",
+    "fecha": "2026-12-24T21:00:00",
+    "personas": 2,
+    "mesa": 4
+  }
+]

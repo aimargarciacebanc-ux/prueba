@@ -1,0 +1,108 @@
+// ============================================================
+// 1. ENDPOINTS DE RESERVAS (por código)
+// ============================================================
+
+### GET todas las reservas (200)
+GET http://127.0.0.1:5095/api/reservas
+
+### GET reserva concreta por código (200)
+GET http://127.0.0.1:5095/api/reservas/R002
+
+### GET reserva que no existe (404)
+GET http://127.0.0.1:5095/api/reservas/R999
+
+### POST crear una reserva nueva, será R005 (201)
+POST http://127.0.0.1:5095/api/reservas
+Content-Type: application/json
+
+{
+  "nombre": "Jon y Ane",
+  "fecha": "2026-12-24T21:00:00",
+  "personas": 2,
+  "mesa": 4
+}
+
+### PUT cambiar solo el estado de R003 (200)
+PUT http://127.0.0.1:5095/api/reservas/R003
+Content-Type: application/json
+
+{
+  "estado": "Confirmada"
+}
+
+### PUT cambiar personas y mesa de R001 (200)
+PUT http://127.0.0.1:5095/api/reservas/R001
+Content-Type: application/json
+
+{
+  "personas": 6,
+  "mesa": 9
+}
+
+### PUT reserva que no existe (404)
+PUT http://127.0.0.1:5095/api/reservas/R999
+Content-Type: application/json
+
+{
+  "nombre": "No existe"
+}
+
+### DELETE borrar R004 (200)
+DELETE http://127.0.0.1:5095/api/reservas/R004
+
+### DELETE reserva que no existe (404)
+DELETE http://127.0.0.1:5095/api/reservas/R999
+
+
+// ============================================================
+// 2. ENDPOINTS DE CAMAREROS (por id)
+// ============================================================
+
+### GET todos los camareros (200)
+GET http://127.0.0.1:5095/api/camareros
+
+### GET camarero concreto por id (200)
+GET http://127.0.0.1:5095/api/camareros/1
+
+### GET camarero que no existe (404)
+GET http://127.0.0.1:5095/api/camareros/99
+
+### POST crear un camarero nuevo, será el id 3 (201)
+POST http://127.0.0.1:5095/api/camareros
+Content-Type: application/json
+
+{
+  "nombre": "Ekaitz Lara",
+  "turno": "Tarde",
+  "telefono": "655555666"
+}
+
+### PUT cambiar solo el turno del camarero 2 (200)
+PUT http://127.0.0.1:5095/api/camareros/2
+Content-Type: application/json
+
+{
+  "turno": "Mañana"
+}
+
+### PUT camarero que no existe (404)
+PUT http://127.0.0.1:5095/api/camareros/99
+Content-Type: application/json
+
+{
+  "nombre": "Nadie"
+}
+
+### DELETE borrar el camarero 1 (200)
+DELETE http://127.0.0.1:5095/api/camareros/1
+
+### DELETE camarero que no existe (404)
+DELETE http://127.0.0.1:5095/api/camareros/99
+
+
+// ============================================================
+// 3. RUTA QUE NO EXISTE
+// ============================================================
+
+### GET ruta inventada (404)
+GET http://127.0.0.1:5095/api/mesas
